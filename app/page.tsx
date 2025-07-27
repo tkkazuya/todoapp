@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Container,
   TextField,
@@ -10,21 +10,21 @@ import {
   ListItemText,
   IconButton,
   Box,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveIcon from "@mui/icons-material/Save";
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function TodoApp() {
   const [todos, setTodos] = useState<string[]>([]);
-  const [input, setInput] = useState<string>("");
+  const [input, setInput] = useState<string>('');
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const [editValue, setEditValue] = useState<string>("");
+  const [editValue, setEditValue] = useState<string>('');
 
   const addTodo = () => {
     if (!input.trim()) return;
     setTodos([...todos, input]);
-    setInput("");
+    setInput('');
   };
 
   const deleteTodo = (index: number) => {
@@ -42,7 +42,7 @@ export default function TodoApp() {
     newTodos[editIndex] = editValue;
     setTodos(newTodos);
     setEditIndex(null);
-    setEditValue("");
+    setEditValue('');
   };
 
   return (
@@ -60,22 +60,25 @@ export default function TodoApp() {
       </Box>
       <List>
         {todos.map((todo, index) => (
-          <ListItem key={index} secondaryAction={
-            editIndex === index ? (
-              <IconButton edge="end" onClick={saveEdit}>
-                <SaveIcon />
-              </IconButton>
-            ) : (
-              <>
-                <IconButton edge="end" onClick={() => startEdit(index)}>
-                  <EditIcon />
+          <ListItem
+            key={index}
+            secondaryAction={
+              editIndex === index ? (
+                <IconButton edge="end" onClick={saveEdit}>
+                  <SaveIcon />
                 </IconButton>
-                <IconButton edge="end" onClick={() => deleteTodo(index)}>
-                  <DeleteIcon />
-                </IconButton>
-              </>
-            )
-          }>
+              ) : (
+                <>
+                  <IconButton edge="end" onClick={() => startEdit(index)}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton edge="end" onClick={() => deleteTodo(index)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </>
+              )
+            }
+          >
             {editIndex === index ? (
               <TextField
                 value={editValue}
